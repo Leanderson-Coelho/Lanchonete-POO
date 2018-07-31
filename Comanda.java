@@ -1,16 +1,19 @@
 package com.lanchonete.model;
 
 import java.util.ArrayList;
+import java.time.LocalDate;
 
 public class Comanda {
 	private ArrayList<Pedido> pedidos;
 	private boolean aberta;//comanda esta aberta|fechada
 	private int mesa;
+	private LocalDate data;
 
-	public Comanda(boolean aberta,int mesa){
+	public Comanda(int mesa){
 		pedidos = new ArrayList<>();
-		this.aberta = aberta;
+		aberta = true;
 		this.mesa = mesa;
+		data = LocalDate.now();
 	}
 	
 	public boolean addPedido(Pedido novoPedido) {
@@ -61,6 +64,12 @@ public class Comanda {
 
 	public void setMesa(int mesa) {
 		this.mesa = mesa;
+	}
+	LocalDate getData() {
+		return data;
+	}
+	void setData(LocalDate data) {
+		this.data = data;
 	}
 
 	@Override

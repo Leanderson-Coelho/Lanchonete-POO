@@ -13,8 +13,9 @@ public class Cozinha{
 		return pedidos.add(p);
 	}
 	
-	public boolean atenderPedido(Comanda comanda,int idPedido) {
-		if(comanda.editarPedidoAtendido(idPedido)) {
+	public boolean atenderPedido(GerenciarMesa gMesa,int idPedido) {
+		if(gMesa.ComandaIdPedido(idPedido) != null) {
+			gMesa.ComandaIdPedido(idPedido).editarPedidoAtendido(idPedido);
 			for(int i = 0;i<pedidos.size();i++) {
 				if(pedidos.get(i).getIdPedido() == idPedido) {
 					pedidos.remove(i);
