@@ -4,13 +4,10 @@ import java.util.ArrayList;
 import java.time.LocalDate;
 
 public class Gerencia {
-	private static ArrayList<Comanda> comandas;
+	private static ArrayList<Comanda> comandas = new ArrayList<>();
 	
-	public Gerencia() {
-		comandas = new ArrayList<>();
-	}
 	
-	public static boolean addComanda(Comanda comanda) {
+	static boolean addComanda(Comanda comanda) {
 		return comandas.add(comanda);
 	}
 //	verificar as comandas de um determinado periodo

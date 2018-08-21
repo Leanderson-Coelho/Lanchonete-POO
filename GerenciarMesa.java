@@ -33,9 +33,10 @@ public class GerenciarMesa {
 		}
 		return null;
 	}
-	
 	public String verPedidos(int mesa) {
-		return comandas.get(getIndexOfComanda(mesa)).toString();
+		if(getIndexOfComanda(mesa) != -1)
+			return comandas.get(getIndexOfComanda(mesa)).toString();
+		return "[Comanda inexistente]\n";
 	}
 	
 	public boolean novoPedido(int mesa, Pedido novoPedido,Cozinha cozinha) {
@@ -46,7 +47,6 @@ public class GerenciarMesa {
 		}
 		return false;
 	}
-	
 //	encerra a comanda se todos os pedidos foram atendidos e adiciona a Gerencia
 	public boolean encerrarComanda(int mesa) {
 		for(Pedido pedido: getComanda(mesa).getPedidos()) {
@@ -60,37 +60,38 @@ public class GerenciarMesa {
 		return true;
 	}
 //	Editar o pedido de uma comanda pela mesa
-	public boolean mudarPedido(int mesa, int idPedido, Produto novoProduto, int quantProduto) {
+	public boolean mudarPedido(int mesa, int idPedido, Produto novoProduto, int quantProduto,Cozinha cozinha) {
 		Comanda comanda = getComanda(mesa);
-		if(comanda.getPedidos().size() > 0) {
-			for(Pedido pedido : comanda.getPedidos()) {
-				if(pedido.getIdPedido() == idPedido) {
-					if(pedido.isAtendido() == false) {
-						pedido.setProduto(novoProduto);
-						pedido.setQuantProduto(quantProduto);
-						return true;
+		if(comanda != null) {
+			if(comanda.getPedidos().size() > 0) {
+				for(Pedido pedido : comanda.getPedidos()) {
+					if(pedido.getIdPedido() == idPedido) {
+						if(pedido.isAtendido() == false) {
+							pedido.setProduto(novoProduto);
+							pedido.setQuantProduto(quantProduto);
+							cozinha.mudarPedido(idPedido, novoProduto, quantProduto);
+							return true;
+						}
 					}
 				}
 			}
 		}
 		return false;
 	}
-	public boolean excluirPedido(int mesa, int idPedido) {
+	public boolean excluirPedido(int mesa, int idPedido, Cozinha cozinha) {
 		int indice = 0;
 		for(Pedido pedido : getComanda(mesa).getPedidos()) {
 			indice++;
-//			System.out.println(indice);
-//			System.out.println(getComanda(mesa).getPedidos().toString());
 			if(pedido.getIdPedido() == idPedido) {
 				if(pedido.isAtendido() == false) {
 					getComanda(mesa).getPedidos().remove(indice-1);
+					cozinha.removerPedido(idPedido);
 					return true;
 				}
 			}
 		}
 		return false;
 	}
-	
 //	retorna a comanda que tem o pedido com o idPedido passado
 	Comanda ComandaIdPedido(int idPedido) {
 		for(Comanda comanda : comandas) {
@@ -101,8 +102,6 @@ public class GerenciarMesa {
 		}
 		return null;
 	}
-	
-
 	public ArrayList<Comanda> getComandas() {
 		return comandas;
 	}

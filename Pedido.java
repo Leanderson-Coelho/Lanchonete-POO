@@ -66,6 +66,6 @@ public class Pedido {
 		return "Pedido [produto=" + produto + ", idPedido=" + idPedido + ", quantProduto=" + quantProduto + ", hora="
 				+ hora + ", data=" + data + ", subTotal=" + getSubTotal() + ", atendido=" + atendido + "]";
 	}
-
+	
 	
 }

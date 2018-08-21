@@ -25,6 +25,33 @@ public class Cozinha{
 		}
 		return false;
 	}
+	boolean removerPedido(int idPedido) {
+		for(Pedido pedido : pedidos)
+			if(pedido.getIdPedido() == idPedido) {
+				pedidos.remove(pedido);
+				return true;
+			}
+		return false;
+	}
+	
+	//Mostrar os ids dos pedidos em aberto
+	public void verIdPedidos() {
+		System.out.print("id dos Pedidos abertos [ ");
+		for(Pedido pedido : pedidos) {
+			System.out.print(pedido.getIdPedido()+ ", ");
+		}
+		System.out.println("]");
+	}
+	boolean mudarPedido(int idPedido, Produto produto, int quantProduto) {
+		for(Pedido pedido : pedidos) {
+			if(pedido.getIdPedido() == idPedido) {
+				pedido.setProduto(produto);
+				pedido.setQuantProduto(quantProduto);
+				return true;
+			}
+		}
+		return false;
+	}
 	
 //	adicionar metodo removerPedido
 	

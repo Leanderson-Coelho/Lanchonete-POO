@@ -1,5 +1,6 @@
 package com.lanchonete.model;
 
+
 import java.util.ArrayList;
 import java.time.LocalDate;
 
@@ -74,7 +75,7 @@ public class Comanda {
 
 	@Override
 	public String toString() {
-		return "Comanda da mesa "+ getMesa()+" [pedidos=" + pedidos + ",\n total=" + getTotal() + ", aberta=" + aberta + ", mesa=" + mesa + "]\n\n";
+		return "Comanda da mesa "+ getMesa()+" [pedidos=" + pedidos + ", total=" + getTotal() + ", aberta=" + aberta + ", mesa=" + mesa + "]\n";
 	}
 	
 
